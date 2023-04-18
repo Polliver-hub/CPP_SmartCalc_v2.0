@@ -28,11 +28,11 @@ class Controller : public QMainWindow {
  private slots:
   void on_pushButton_graph_clicked();  ///< Слот вызывает создание графика
   void on_pushButton_C_clicked();  ///< Слот вызывает очистку всего уравнения
-  void on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
+  void
+  on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
 
   void
   AnyButtonClick();  ///< Слот добавляет символ кнопки которая вызвала этот слот
-
 
  private:
   Ui::Controller *ui;  ///< Указатель на View

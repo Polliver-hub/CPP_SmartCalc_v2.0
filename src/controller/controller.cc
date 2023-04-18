@@ -20,7 +20,8 @@ Controller::Controller(QWidget *parent)
   connect(ui->pushButton_dot, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 
   connect(ui->pushButton_plus, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
-  connect(ui->pushButton_minus, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
+  connect(ui->pushButton_minus, SIGNAL(clicked()), this,
+          SLOT(AnyButtonClick()));
   connect(ui->pushButton_mul, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
   connect(ui->pushButton_div, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
   connect(ui->pushButton_mod, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
@@ -120,7 +121,7 @@ void Controller::on_pushButton_equil_clicked() {
   Model::CalculationError error =
       data.SolveEquation(&result, ui->doubleSpinBox_SetX->value());
   if (!error) {
-    data.AddNewExp(QString::number(result, 'f', 7).toStdString());
+    data.AddNewExp(QString::number(result).toStdString());
     ui->input_text->setText(QString::fromStdString(data.ToString()));
     history += " = " + ui->input_text->text();
     ui->history_text->appendPlainText(history);
@@ -146,10 +147,9 @@ void Controller::on_pushButton_equil_clicked() {
       case Model::DIV_ZERO:
         error_text = "Деление на ноль, невозможно";
         break;
-    case Model::SUCCESS:
+      case Model::SUCCESS:
         break;
     }
     QMessageBox::warning(this, "Ошибка", error_text);
   }
 }
-
