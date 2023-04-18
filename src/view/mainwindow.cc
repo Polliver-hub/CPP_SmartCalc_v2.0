@@ -1,11 +1,11 @@
-#include "controller.h"
+#include "mainwindow.h"
 
-#include "../view/ui_view.h"
+#include "ui_mainwindow.h"
 
 using namespace s21;
 
-Controller::Controller(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::Controller) {
+Mainwindow::Mainwindow(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Mainwindow) {
   ui->setupUi(this);
   connect(ui->pushButton_0, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
   connect(ui->pushButton_1, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
@@ -46,7 +46,7 @@ Controller::Controller(QWidget *parent)
   connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 }
 
-void Controller::AnyButtonClick() {
+void Mainwindow::AnyButtonClick() {
   switch (
       data.PushBack(((QPushButton *)sender())->text().toStdString().back())) {
     case Model::DOT_FOR_CONST:
@@ -86,9 +86,9 @@ void Controller::AnyButtonClick() {
   };
 }
 
-Controller::~Controller() { delete ui; }
+Mainwindow::~Mainwindow() { delete ui; }
 
-void Controller::on_pushButton_graph_clicked() {
+void Mainwindow::on_pushButton_graph_clicked() {
   if (data.IsValid()) {
     QLineSeries *series = new QLineSeries();
     int xAxisSize = ui->doubleSpinBox_domain_max->value(),
@@ -110,12 +110,12 @@ void Controller::on_pushButton_graph_clicked() {
   }
 }
 
-void Controller::on_pushButton_C_clicked() {
+void Mainwindow::on_pushButton_C_clicked() {
   data.Clear();
   ui->input_text->setText(QString::fromStdString(data.ToString()));
 }
 
-void Controller::on_pushButton_equil_clicked() {
+void Mainwindow::on_pushButton_equil_clicked() {
   double result = 0;
   QString history = ui->input_text->text();
   Model::CalculationError error =

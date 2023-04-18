@@ -76,7 +76,7 @@ bool Model::IsValid() {
                       BackType() == Model::CONST || BackType() == END_EXP));
 }
 
-Model::CalcTypeError Model::PushBack(char symbol) {
+Model::TypeInputError Model::PushBack(char symbol) {
   if (_expression.size() == 255) return OVER_FLOW_EXP;
   if (symbol == ',') {
     symbol = '.';

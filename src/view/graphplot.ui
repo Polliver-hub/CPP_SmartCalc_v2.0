@@ -20,7 +20,7 @@
    <string>Graph</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../icon/icon.qrc">
     <normaloff>:/Line-Chart.png</normaloff>:/Line-Chart.png</iconset>
   </property>
   <property name="styleSheet">
@@ -32,6 +32,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icon/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

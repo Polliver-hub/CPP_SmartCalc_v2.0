@@ -26,7 +26,7 @@ class Model {
     BRACKET_MINUS,  ///< Закрывающихся скобок больше чем открывающихся
     OVER_FLOW_EXP,  ///< Значений в контейнере 255(потолок по заданию)
     INCOMPLETE_EXP  ///< Закрывающаяся скобка после операторов
-  } CalcTypeError;  ///< Список ошибок на стадии ввода значений в контейнер
+  } TypeInputError;  ///< Список ошибок на стадии ввода значений в контейнер
 
   typedef enum TypeOfCalculationError {
     SUCCESS,    ///< Ошибки нет, все посчитано
@@ -44,7 +44,7 @@ class Model {
    * @param symbol символ для добавления в уравнение
    * @return true, если символ уложился в уравнение и false, если не уложился
    */
-  CalcTypeError PushBack(char symbol);
+  TypeInputError PushBack(char symbol);
   /**
    * @brief Удаляет последний добавленный символ в контейнере
    */

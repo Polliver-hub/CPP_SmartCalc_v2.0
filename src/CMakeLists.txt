@@ -14,14 +14,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts)
 
 set(PROJECT_SOURCES
         main.cc
-        controller/controller.cc
-        controller/controller.h
-        controller/graphplot.cc
-        controller/graphplot.h
-        controller/graphplot.ui
         model/model.cc
         model/model.h
-        view/view.ui)
+#        controller/controller.cc
+#        controller/controller.h
+        view/graphplot.cc
+        view/graphplot.h
+        view/graphplot.ui
+        view/mainwindow.cc
+        view/mainwindow.h
+        view/mainwindow.ui)
 
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
