@@ -12,7 +12,7 @@ GraphPlot::GraphPlot(QLineSeries *series_, int xAxisSize, int yAxisSize,
   PrintAxis(xAxisSize, yAxisSize);
 
   if (series) {
-    series->setColor("Blue");
+    series->setColor("Red");
     chart->addSeries(series);
     series->attachAxis(xAxis);
     series->attachAxis(yAxis);
@@ -51,7 +51,7 @@ void GraphPlot::PrintAxis(int xAxisSize, int yAxisSize) {
 
   seriesAxis->append(-yAxisSize, 0);
   seriesAxis->append(yAxisSize, 0);
-  seriesAxis->setColor("Green");
+  seriesAxis->setColor("Black");
 
   chart->addSeries(seriesAxis);
 

@@ -26,10 +26,8 @@ class Controller : public QMainWindow {
   ~Controller();  ///< Дефолтный деструктор
 
  private slots:
-  void on_buttonGraph_clicked();  ///< Слот вызывает создание графика
+  void on_pushButton_graph_clicked();  ///< Слот вызывает создание графика
   void on_pushButton_C_clicked();  ///< Слот вызывает очистку всего уравнения
-  void on_buttonCE_clicked();  ///< Слот вызывает очистку последнего
-                               ///< добавленного элемента
   void on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
 
   void

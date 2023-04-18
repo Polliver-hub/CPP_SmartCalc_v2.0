@@ -9,7 +9,6 @@ Model::CalcTypeSymbol Model::WhatIsSymbol(char symbol) {
     case '.':
       return Model::DOT;
     case 'x':
-    case 'p':
     case 'e':
       return Model::CONST;
     case '+':
@@ -246,9 +245,6 @@ std::string Model::ToString() {
       case 'm':
         exp.append("mod");
         break;
-      case 'p':
-        exp.append("π");
-        break;
       default:
         exp.push_back(item.first);
     }
@@ -383,9 +379,6 @@ Model::CalculationError Model::SolveEquation(double *result, double x) {
         break;
       case 'e':
         numbers.push(2.71828182845904523536);
-        break;
-      case 'p':
-        numbers.push(3.14159265358979323846);
         break;
       case '(':
         operators.push('(');

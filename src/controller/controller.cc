@@ -41,8 +41,7 @@ Controller::Controller(QWidget *parent)
   connect(ui->pushButton_tan, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
   connect(ui->pushButton_atan, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 
-//  connect(ui->buttonE, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
-//  connect(ui->buttonPI, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
+  connect(ui->pushButton_e, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
   connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 }
 
@@ -88,7 +87,7 @@ void Controller::AnyButtonClick() {
 
 Controller::~Controller() { delete ui; }
 
-void Controller::on_buttonGraph_clicked() {
+void Controller::on_pushButton_graph_clicked() {
   if (data.IsValid()) {
     QLineSeries *series = new QLineSeries();
     int xAxisSize = ui->doubleSpinBox_domain_max->value(),
@@ -115,20 +114,16 @@ void Controller::on_pushButton_C_clicked() {
   ui->input_text->setText(QString::fromStdString(data.ToString()));
 }
 
-void Controller::on_buttonCE_clicked() {
-  if (!data.Empty()) {
-    data.PopBack();
-    ui->input_text->setText(QString::fromStdString(data.ToString()));
-  }
-}
-
 void Controller::on_pushButton_equil_clicked() {
   double result = 0;
+  QString history = ui->input_text->text();
   Model::CalculationError error =
       data.SolveEquation(&result, ui->doubleSpinBox_SetX->value());
   if (!error) {
     data.AddNewExp(QString::number(result, 'f', 7).toStdString());
     ui->input_text->setText(QString::fromStdString(data.ToString()));
+    history += " = " + ui->input_text->text();
+    ui->history_text->appendPlainText(history);
   } else {
     QString error_text;
     switch (error) {
@@ -158,12 +153,3 @@ void Controller::on_pushButton_equil_clicked() {
   }
 }
 
-//void Controller::on_openCreditCalc_clicked() {
-//  CreditCalc credit;
-//  credit.exec();
-//}
-//
-//void Controller::on_openDebitCalc_clicked() {
-//  DebitCalc debit;
-//  debit.exec();
-//}
