@@ -23,9 +23,15 @@ ifeq ($(OS), Darwin)
 else
 	@mv ../$(BUILD)/$(PROJECT_NAME) ../$(APP)/$(PROJECT_NAME).app
 endif
-#	@-ln ../$(APP)/$(PROJECT_NAME).app
-	@#rm -rf ../$(BUILD)
+	@-ln ../$(APP)/$(PROJECT_NAME).app
+	@rm -rf ../$(BUILD)
 	@echo "Installing success"
+
+#install: clean
+#	@mkdir build
+#	cmake -B build
+#	cd build && make
+#	@open SmartCalc.app
 
 tests:
 	@echo "Tests start..."
@@ -48,9 +54,8 @@ uninstall:
 	@echo "Uninstalling success"
 
 dvi:
-	doxygen Doxyfile
-	cp -r images ../documentation/html/
-
+	@doxygen Doxyfile
+	@open ../documentation/html/index.html
 
 dist: clean
 	@mkdir -p ../$(DIST)
