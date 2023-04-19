@@ -1,44 +1,29 @@
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
-
-#include <QMainWindow>
+#ifndef SRC_CONTROLLER_CONTROLLER_H_
+#define SRC_CONTROLLER_CONTROLLER_H_
 
 #include "../model/model.h"
-#include "graphplot.h"
-
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class Controller;
-}
-QT_END_NAMESPACE
 
 namespace s21 {
-/**
- * @brief Контроллер для приложения калькулятора
- */
-class Controller : public QMainWindow {
-  Q_OBJECT
-
+class Controller {
  public:
-  Controller(
-      QWidget *parent = nullptr);  ///< Дефолтный конструктор с вариационным
-                                   ///< указателем на родителя
-  ~Controller();  ///< Дефолтный деструктор
+  Controller();
+  ~Controller();
 
- private slots:
-  void on_pushButton_graph_clicked();  ///< Слот вызывает создание графика
-  void on_pushButton_C_clicked();  ///< Слот вызывает очистку всего уравнения
-  void
-  on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
+  Model::TypeInputError pushBack(char symbol);
 
-  void
-  AnyButtonClick();  ///< Слот добавляет символ кнопки которая вызвала этот слот
+  std::string ToString();
 
- private:
-  Ui::Controller *ui;  ///< Указатель на View
-  Model data;          ///< Объект класса Model
+  bool IsValid();
+
+  Model::CalculationError SolveEquation(double *result, double x);
+
+  void Clear();
+
+  bool AddNewExp(std::string exp);
+
+private:
+ Model model;
 };
-
 }  // namespace s21
 
-#endif  // CONTROLLER_H_
+#endif  // SRC_CONTROLLER_CONTROLLER_H_

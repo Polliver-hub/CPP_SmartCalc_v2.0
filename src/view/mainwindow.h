@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "../model/model.h"
+#include "../controller/controller.h"
 #include "graphplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -14,29 +15,26 @@ QT_END_NAMESPACE
 
 namespace s21 {
 /**
- * @brief Контроллер для приложения калькулятора
+ * @brief View для приложения калькулятора
  */
 class Mainwindow : public QMainWindow {
   Q_OBJECT
 
  public:
-    Mainwindow(
-      QWidget *parent = nullptr);  ///< Дефолтный конструктор с вариационным
+    Mainwindow(QWidget *parent = nullptr);  ///< Дефолтный конструктор с вариационным
                                    ///< указателем на родителя
-  ~Mainwindow();  ///< Дефолтный деструктор
+    ~Mainwindow();  ///< Дефолтный деструктор
 
  private slots:
   void on_pushButton_graph_clicked();  ///< Слот вызывает создание графика
   void on_pushButton_C_clicked();  ///< Слот вызывает очистку всего уравнения
-  void
-  on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
+  void on_pushButton_equil_clicked();  ///< Слот вызывает вызов решения уравнения
 
-  void
-  AnyButtonClick();  ///< Слот добавляет символ кнопки которая вызвала этот слот
+  void AnyButtonClick();  ///< Слот добавляет символ кнопки которая вызвала этот слот
 
  private:
   Ui::Mainwindow *ui;  ///< Указатель на View
-  Model data;          ///< Объект класса Model
+  Controller controller;///< Объект класса Controller
 };
 
 }  // namespace s21

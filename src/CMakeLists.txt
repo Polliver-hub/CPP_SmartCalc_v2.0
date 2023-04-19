@@ -16,8 +16,8 @@ set(PROJECT_SOURCES
         main.cc
         model/model.cc
         model/model.h
-#        controller/controller.cc
-#        controller/controller.h
+        controller/controller.cc
+        controller/controller.h
         view/graphplot.cc
         view/graphplot.h
         view/graphplot.ui

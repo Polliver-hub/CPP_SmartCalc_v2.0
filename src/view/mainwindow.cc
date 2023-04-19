@@ -46,9 +46,10 @@ Mainwindow::Mainwindow(QWidget *parent)
   connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 }
 
+
 void Mainwindow::AnyButtonClick() {
   switch (
-      data.PushBack(((QPushButton *)sender())->text().toStdString().back())) {
+      controller.pushBack(((QPushButton *)sender())->text().toStdString().back())) {
     case Model::DOT_FOR_CONST:
       QMessageBox::warning(this, "Ошибка",
                            "Невозможно установить точность к константе");
@@ -82,47 +83,46 @@ void Mainwindow::AnyButtonClick() {
                            "требуется поставить значение");
       break;
     default:
-      ui->input_text->setText(QString::fromStdString(data.ToString()));
+      ui->input_text->setText(QString::fromStdString(controller.ToString()));
   };
 }
 
 Mainwindow::~Mainwindow() { delete ui; }
 
 void Mainwindow::on_pushButton_graph_clicked() {
-  if (data.IsValid()) {
+  if (controller.IsValid()) {
     QLineSeries *series = new QLineSeries();
     int xAxisSize = ui->doubleSpinBox_domain_max->value(),
         yAxisSize = ui->doubleSpinBox_range_max->value();
     double increment = xAxisSize / 10000.;
     double result;
     for (double i = -xAxisSize; i < xAxisSize; i += increment) {
-      if (!data.SolveEquation(&result, i)) {
+      if (!controller.SolveEquation(&result, i)) {
         *series << QPointF(i, result);
       }
     }
-
     GraphPlot graph(series, yAxisSize, xAxisSize);
     graph.exec();
     on_pushButton_C_clicked();
   } else {
-    data.Clear();
+    controller.Clear();
     QMessageBox::warning(this, "Ошибка", "Не правильное уравнение");
   }
 }
 
 void Mainwindow::on_pushButton_C_clicked() {
-  data.Clear();
-  ui->input_text->setText(QString::fromStdString(data.ToString()));
+  controller.Clear();
+  ui->input_text->setText(QString::fromStdString(controller.ToString()));
 }
 
 void Mainwindow::on_pushButton_equil_clicked() {
   double result = 0;
   QString history = ui->input_text->text();
   Model::CalculationError error =
-      data.SolveEquation(&result, ui->doubleSpinBox_SetX->value());
+      controller.SolveEquation(&result, ui->doubleSpinBox_SetX->value());
   if (!error) {
-    data.AddNewExp(QString::number(result).toStdString());
-    ui->input_text->setText(QString::fromStdString(data.ToString()));
+    controller.AddNewExp(QString::number(result).toStdString());
+    ui->input_text->setText(QString::fromStdString(controller.ToString()));
     history += " = " + ui->input_text->text();
     ui->history_text->appendPlainText(history);
   } else {
@@ -139,13 +139,13 @@ void Mainwindow::on_pushButton_equil_clicked() {
         error_text = "Нет корня от отрицательного числа";
         break;
       case Model::ASIN_RANGE:
-        error_text = "Арксинус есть только в пределах от -1 до 1";
+        error_text = "Арксинус ограничен от -1 до 1";
         break;
       case Model::ACOS_RANGE:
-        error_text = "Арккосинус есть только в пределах от -1 до 1";
+        error_text = "Арккосинус ограничен от -1 до 1";
         break;
       case Model::DIV_ZERO:
-        error_text = "Деление на ноль, невозможно";
+        error_text = "Деление на ноль - невозможно";
         break;
       case Model::SUCCESS:
         break;
