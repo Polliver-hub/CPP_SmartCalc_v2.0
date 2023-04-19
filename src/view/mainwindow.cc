@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+#include "graphplot.h"
 #include "ui_mainwindow.h"
 
 using namespace s21;
@@ -46,18 +47,15 @@ Mainwindow::Mainwindow(QWidget *parent)
   connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(AnyButtonClick()));
 }
 
-
 void Mainwindow::AnyButtonClick() {
-  switch (
-      controller.pushBack(((QPushButton *)sender())->text().toStdString().back())) {
+  switch (controller.pushBack(
+      ((QPushButton *)sender())->text().toStdString().back())) {
     case Model::DOT_FOR_CONST:
       QMessageBox::warning(this, "Ошибка",
                            "Невозможно установить точность к константе");
       break;
     case Model::DOUBLE_DOT:
-      QMessageBox::warning(
-          this, "Ошибка",
-          "В этом числе уже есть точка");
+      QMessageBox::warning(this, "Ошибка", "В этом числе уже есть точка");
       break;
     case Model::DOUBLE_OPER:
       QMessageBox::warning(

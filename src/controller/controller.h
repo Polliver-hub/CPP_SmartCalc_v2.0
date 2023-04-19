@@ -21,8 +21,8 @@ class Controller {
 
   bool AddNewExp(std::string exp);
 
-private:
- Model model;
+ private:
+  Model model;
 };
 }  // namespace s21
 

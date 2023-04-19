@@ -10,7 +10,7 @@
 
 namespace s21 {
 /**
- * @brief Модель для приложения калькулятора
+ * @brief Model для приложения калькулятора
  */
 class Model {
  public:
