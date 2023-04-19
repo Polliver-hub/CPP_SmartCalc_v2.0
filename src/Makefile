@@ -56,7 +56,7 @@ dist: clean
 	tar -cvzf ../$(DIST)/source_code.tar.gz .
 
 style:
-	@clang-format -i -style=google $(shell find . \( -name "*.cc" -or -name "*.h" \))
+	@clang-format -n -style=google $(shell find . \( -name "*.cc" -or -name "*.h" \))
 
 clean:
 	@echo "Cleaning..."
