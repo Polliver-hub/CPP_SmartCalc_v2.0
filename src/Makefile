@@ -23,15 +23,9 @@ ifeq ($(OS), Darwin)
 else
 	@mv ../$(BUILD)/$(PROJECT_NAME) ../$(APP)/$(PROJECT_NAME).app
 endif
-	@-ln ../$(APP)/$(PROJECT_NAME).app
+	@open ../$(APP)/$(PROJECT_NAME).app
 	@rm -rf ../$(BUILD)
 	@echo "Installing success"
-
-#install: clean
-#	@mkdir build
-#	cmake -B build
-#	cd build && make
-#	@open SmartCalc.app
 
 tests:
 	@echo "Tests start..."
@@ -62,7 +56,7 @@ dist: clean
 	tar -cvzf ../$(DIST)/source_code.tar.gz .
 
 style:
-	@clang-format -n -style=google $(shell find . \( -name "*.cc" -or -name "*.h" \))
+	@clang-format -i -style=google $(shell find . \( -name "*.cc" -or -name "*.h" \))
 
 clean:
 	@echo "Cleaning..."
